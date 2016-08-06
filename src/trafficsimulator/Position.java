@@ -6,11 +6,11 @@ package trafficsimulator;
  */
 public class Position {
     String name;
-    int x;
-    int y;
+    double x;
+    double y;
 
     
-    public Position(String name, int x, int y) {
+    public Position(String name, double x, double y) {
         this.name = name;
         this.x = x;
         this.y = y;
