@@ -12,7 +12,7 @@ public class Intersection extends Position {
     HashMap<Lane, ArrayList<Lane>> turnOptions = new HashMap<Lane, ArrayList<Lane>>(); 
     ArrayList<Road> roads = new ArrayList<Road>(); // not defined in any particular order
     
-    public Intersection(String name, int x, int y ) {
+    public Intersection(String name, Double x, Double y ) {
         super(name, x, y);
     }
     

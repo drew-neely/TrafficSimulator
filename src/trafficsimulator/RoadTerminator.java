@@ -6,7 +6,7 @@ package trafficsimulator;
  */
 public class RoadTerminator extends Position {
     
-    public RoadTerminator(String name, int x, int y) {
+    public RoadTerminator(String name, Double x, Double y) {
         super(name, x, y);
     }
 }
