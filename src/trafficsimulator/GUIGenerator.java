@@ -25,9 +25,11 @@ import javax.swing.JPanel;
  */
 public class GUIGenerator extends JFrame {
 
+    double carRadius = 5;
     double laneSpace = 20;
     double medianSpace = 30;
     ArrayList<Line2D.Double> Lines = new ArrayList<Line2D.Double>();
+    ArrayList<Ellipse2D.Double> Ellipses = new ArrayList<Ellipse2D.Double>();
 
     public GUIGenerator() {
         JPanel panel = new JPanel();
@@ -43,6 +45,10 @@ public class GUIGenerator extends JFrame {
         for (int i = 0; i < Lines.size(); i++) {
             g2.draw(Lines.get(i));
         }
+        
+        for(int i = 0; i < Ellipses.size(); i++){
+        g2.fill(Ellipses.get(i));
+    }
     }
 
     public void addAllRoads() {
@@ -94,5 +100,37 @@ public class GUIGenerator extends JFrame {
             Lines.add(new Line2D.Double(SX, SY, EX, EY));
 
         }
+    }
+    
+    public void addAllCars(){
+        
+        for(int i = 0; i<TrafficSimulator.cars.size(); i++){
+            findCarPosition(TrafficSimulator.cars.get(i));
+        }
+            
+    }
+    
+    public void findCarPosition(Car C){
+        int index =0;
+        for(int i =0; i< C.currentRoad.lanes.length; i++){
+         if(C.currentRoad.lanes[i].equals(C.currentLane))
+             index = i;
+        }
+        
+        
+        double angle = Math.atan(-1.0/C.direction);
+        double startX = C.pos.x;
+        double startY = C.pos.y;
+        double offset;
+        if(index<C.currentRoad.lanesAgainst){
+            offset = -medianSpace/2.0 - laneSpace*(C.currentRoad.lanesAgainst-index-1);
+        }else{
+            offset = medianSpace/2.0 +laneSpace*(index-C.currentRoad.lanesAgainst);
+        }
+        
+        double finalX = startX + offset*Math.cos(angle);
+        double finalY = startY + offset*Math.sin(angle);
+        
+        Ellipses.add(new Ellipse2D.Double(finalX, finalY, carRadius, carRadius));
     }
 }
