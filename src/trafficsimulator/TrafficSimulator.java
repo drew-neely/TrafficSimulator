@@ -1,9 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package trafficsimulator;
 
+package trafficsimulator;
+import java.util.*;
+import java.io.*;
 /**
  *
  * @author Drew
@@ -13,7 +11,8 @@ public class TrafficSimulator {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws IOException{
+        Scanner map = new Scanner(new File("Test1_2Intersections.rdm"));
+        if
     }
 }
