@@ -6,10 +6,10 @@ package trafficsimulator;
  */
 public class Car {
     
-    double stopDistance;
-    double snapDistance;
+    double stopDistance = 20;
+    double snapDistance = 10;
     double collisionDistance = 5;
-    double velocity;
+    double velocity = 5;
     boolean inIntersection = false;
     
     Position pos;
@@ -32,6 +32,8 @@ public class Car {
             lastGoal = currentRoad.path.get(currentRoad.path.size()-1);
             currentGoal = currentRoad.path.get(currentRoad.path.size()-2);
         }
+        
+        determineDirection();
     }
 
     public void determineDirection(){
@@ -100,9 +102,9 @@ public class Car {
     }
     
     public void move(){
-        double dX = 1.0/Math.sqrt(1+direction*direction)*velocity;
-        pos.x += dX;
-        pos.y+= Math.sqrt(1-dX*dX);
+        double angle = Math.atan(direction);
+        pos.x += velocity * Math.cos(angle);
+        pos.y += velocity * Math.sin(angle);
     }
     
     public void decideNextTurn(){
