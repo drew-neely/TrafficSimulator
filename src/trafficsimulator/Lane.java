@@ -7,4 +7,7 @@ package trafficsimulator;
 public class Lane {
     Direction direction;
     
+    public Lane(Direction direction) {
+        this.direction = direction;
+    }
 }
