@@ -6,8 +6,10 @@ package trafficsimulator;
  */
 public class Lane {
     Direction direction;
+    Road parentRoad;
     
-    public Lane(Direction direction) {
+    public Lane(Road parentRoad, Direction direction) {
+        this.parentRoad = parentRoad;
         this.direction = direction;
     }
 }
