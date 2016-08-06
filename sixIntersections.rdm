@@ -1,0 +1,21 @@
+		Term S1 0 150
+		Term S2 1200 150
+		Term S3 0 450
+		Term S4 1200 450
+		Term S5 0 750
+		Term S6 0 750
+		Term S7 300 0
+		Term S8 300 900
+		Term S9 900 0
+		Term S10 900 900
+		Inter I1 300 150
+		Inter I2 900 150
+		Inter I3 300 450
+		Inter I4 900 450
+		Inter I5 300 750
+		Inter I6 900 750
+	Road R1 1 1 S1 I1:0:1 I2:0:1 S2
+	Road R2 2 1 S3 I3:::1 I4:0:1: S5
+	Road R3 1 1 S4 I2:0:1 I6:0:1 S6
+	Road R4 2 0 S7 I1:1:0 I3:1:0 I5:1:0 S8
+	Road R5 0 2 S9 I2:1:0 I4:2:0 I6:1:0 S10
