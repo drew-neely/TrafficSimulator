@@ -16,11 +16,24 @@ public class Intersection extends Position {
         super(name, x, y);
     }
     
-    public void setInfo(Road road, Lane fromLane, ArrayList<Integer> toLanes) {
-        preTurnOptions.put(fromLane, toLanes);
+    public ArrayList<Lane> getPossibilities(Lane start) {
+        return turnOptions.get(start);
+    }
+    
+    public void setInfo(Road road, Lane fromLane, ArrayList<Integer> preToLanes) {
+        preTurnOptions.put(fromLane, preToLanes);
     }
     
     public void finalize() {
-        
+        for (Map.Entry<Lane, ArrayList<Integer>> entry : preTurnOptions.entrySet()) {
+            Lane fromLane = entry.getKey();
+            ArrayList<Integer> preToLanes = entry.getValue();
+            ArrayList<Lane> toLanes = new ArrayList<Lane>();
+            Road toRoad = (roads.get(0).equals(fromLane.parentRoad))? roads.get(1) : roads.get(0);
+            for(int i = 0; i < preToLanes.size(); i++) {
+                toLanes.add(toRoad.lanes[preToLanes.get(i)]);
+            }
+            turnOptions.put(fromLane, toLanes);
+        }
     }
 }
