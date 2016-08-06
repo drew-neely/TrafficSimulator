@@ -13,6 +13,8 @@ public class TrafficSimulator {
      */
     public static void main(String[] args) throws IOException{
         Scanner map = new Scanner(new File("Test1_2Intersections.rdm"));
-        if
+        map.next(); map.next();
+        
+                
     }
 }
