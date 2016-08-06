@@ -65,6 +65,7 @@ public class TrafficSimulator extends TimerTask {
         }
         TrafficSimulator trafficSim = new TrafficSimulator();
         gui.addAllRoads();
+        gui.addAllCars();
         
         gui.setVisible(true);
         Timer timer = new Timer();
