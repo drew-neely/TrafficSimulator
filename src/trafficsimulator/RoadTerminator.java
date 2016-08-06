@@ -33,6 +33,7 @@ public class RoadTerminator extends Position {
             }
             Lane lane = lanes.get((int) (Math.random() * lanes.size()));
             TrafficSimulator.cars.add(new Car(this, road, lane));
+            
         }
     }
     

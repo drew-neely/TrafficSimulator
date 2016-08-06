@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  */
 public class GUIGenerator extends JFrame {
 
-    double carRadius = 5;
+    double carRadius = 10;
     double laneSpace = 20;
     double medianSpace = 30;
     ArrayList<Line2D.Double> Lines = new ArrayList<Line2D.Double>();
@@ -40,7 +40,7 @@ public class GUIGenerator extends JFrame {
 
     @Override
     public void paint(Graphics g) {
-
+        g.clearRect(0, 0, 2000, 2000);
         Graphics2D g2 = (Graphics2D) g;
         for (int i = 0; i < Lines.size(); i++) {
             g2.draw(Lines.get(i));
@@ -108,6 +108,7 @@ public class GUIGenerator extends JFrame {
             findCarPosition(TrafficSimulator.cars.get(i));
         }
             
+        
     }
     
     public void findCarPosition(Car C){
