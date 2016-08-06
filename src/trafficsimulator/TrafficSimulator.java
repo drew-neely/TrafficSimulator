@@ -41,6 +41,7 @@ public class TrafficSimulator extends TimerTask {
                     for(int i = 0; i < roadTerminators.size(); i++) {
                         if(roadTerminators.get(i).name.equals(name)) {
                             road.addRoadTerminator(roadTerminators.get(i));
+                            roadTerminators.get(i).setRoad(road);
                         }
                     }
                     for(int i = 0; i < intersections.size(); i++) {

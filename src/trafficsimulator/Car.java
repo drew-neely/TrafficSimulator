@@ -22,6 +22,16 @@ public class Car {
     
     public Car(Position startPos, Road startRoad, Lane startLane){
         
+        pos = startPos;
+        currentRoad = startRoad;
+        currentLane = startLane;
+        if(currentLane.direction==Direction.WITH_ROAD_DEF){
+            lastGoal = currentRoad.path.get(0);
+            currentGoal = currentRoad.path.get(1);
+        }else{
+            lastGoal = currentRoad.path.get(currentRoad.path.size()-1);
+            currentGoal = currentRoad.path.get(currentRoad.path.size()-2);
+        }
     }
 
     public void determineDirection(){
