@@ -8,6 +8,7 @@ public class Car {
     
     double stopDistance;
     double snapDistance;
+    double collisionDistance = 5;
     double velocity;
     boolean inIntersection = false;
     
@@ -37,7 +38,11 @@ public class Car {
         if(distance(pos, currentGoal)<stopDistance&& currentGoal instanceof Intersection){
             
             handleIntersection();
-        }else if(distance(pos, currentGoal)<snapDistance&& !(currentGoal instanceof Intersection)){
+        }else if(distance(pos, currentGoal)<snapDistance&& currentGoal instanceof RoadTerminator){
+            
+            TrafficSimulator.cars.remove(this);
+            
+        }else if(distance(pos, currentGoal)<snapDistance){
             pos.x = currentGoal.x;
             pos.y = currentGoal.y;
             lastGoal = currentGoal;
@@ -52,7 +57,9 @@ public class Car {
             determineDirection();
             
         }else{
+            if(!checkCollisions()){
             move();
+            }
         }
         
         }
@@ -109,6 +116,24 @@ public class Car {
     
     public void changeLanes(Lane newLane){
         currentLane = newLane;
+    }
+    
+    public boolean checkCar(Car C){
+        
+        double approxSlope = (C.pos.y-pos.y)/(C.pos.x-pos.x);
+        if(Math.abs(approxSlope-direction)<.05 && (distance(pos, C.pos)< collisionDistance)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public boolean checkCollisions(){
+        boolean collision = false;
+        for(int i =0; i<TrafficSimulator.cars.size(); i++){
+            collision |= checkCar(TrafficSimulator.cars.get(i));
+        }
+        return collision;
     }
 }
 
