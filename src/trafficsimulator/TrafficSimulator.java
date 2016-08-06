@@ -6,13 +6,15 @@ import java.io.*;
  *
  * @author Drew
  */
-public class TrafficSimulator {
+public class TrafficSimulator extends TimerTask {
 
     static ArrayList<Position> positions = new ArrayList<Position>();
     static ArrayList<RoadTerminator> roadTerminators = new ArrayList<RoadTerminator>();
     static ArrayList<Intersection> intersections = new ArrayList<Intersection>();
-    
     static ArrayList<Road> roads = new ArrayList<Road>();
+    static ArrayList<Car> cars = new ArrayList<Car>();
+    
+    static GUIGenerator gui = new GUIGenerator();
     
     public static void main(String[] args) throws IOException{
         Scanner map = new Scanner(new File("Test1_2Intersections.rdm"));
@@ -60,5 +62,24 @@ public class TrafficSimulator {
                 roads.add(road);
             }
         }
+        TrafficSimulator trafficSim = new TrafficSimulator();
+        gui.addAllRoads();
+        
+        gui.setVisible(true);
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(trafficSim, new Date(), 60);
     }
+    
+    @Override
+    public void run() {
+        for(int i = 0; i < roadTerminators.size(); i++) {
+            roadTerminators.get(i).addCar();
+        }
+        
+        for(int i = 0; i < cars.size(); i++) {
+            cars.get(i).drive();
+        }
+        gui.repaint();
+    }
+    
 }
