@@ -1,15 +1,11 @@
-Positions
-	Terminators
-		S1 0 200
-		S2 800 200
-		S3 200 0
-		S4 600 0
-		S5 200 400
-		S6 600 400
-	Intersections
-		I1 200 200
-		I2 600 200
-Roads
-	R1 1 1 S1 I1:0:1 I2:0:1 S2
-	R2 2 0 S3 I1:1:0 S5
-	R3 2 0 S4 I2:1:0 S6
+Term S1 0 200
+Term S2 800 200
+Term S3 200 0
+Term S4 600 0
+Term S5 200 400
+Term S6 600 400
+Inter I1 200 200
+Inter I2 600 200
+Road R1 1 1 S1 I1:0:1 I2:0:1 S2
+Road R2 2 0 S3 I1:1:0 S5
+Road R3 2 0 S4 I2:1:0 S6
