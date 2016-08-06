@@ -12,4 +12,8 @@ public class Lane {
         this.parentRoad = parentRoad;
         this.direction = direction;
     }
+    
+    public String toString() {
+        return "";
+    } 
 }

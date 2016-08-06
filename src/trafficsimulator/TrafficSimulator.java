@@ -60,7 +60,5 @@ public class TrafficSimulator {
                 roads.add(road);
             }
         }
-        
-                
     }
 }

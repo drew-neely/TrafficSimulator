@@ -36,4 +36,9 @@ public class Intersection extends Position {
             turnOptions.put(fromLane, toLanes);
         }
     }
+    
+    @Override
+    public String toString() {
+        return "Intersection \"" + name + "\" : (" + x + ", " + y + ")";
+    }
 }
