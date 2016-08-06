@@ -7,6 +7,7 @@ package trafficsimulator;
 public class Car {
     
     double stopDistance;
+    double snapDistance;
     double velocity;
     boolean inIntersection = false;
     
@@ -34,8 +35,22 @@ public class Car {
             
         }else{
         if(distance(pos, currentGoal)<stopDistance&& currentGoal instanceof Intersection){
-            Intersection next = (Intersection) currentGoal;
-            handleIntersection(next);
+            
+            handleIntersection();
+        }else if(distance(pos, currentGoal)<snapDistance&& !(currentGoal instanceof Intersection)){
+            pos.x = currentGoal.x;
+            pos.y = currentGoal.y;
+            lastGoal = currentGoal;
+            int change;
+        if(currentLane.direction == Direction.WITH_ROAD_DEF){
+            change = 1;
+        }else{
+            change = -1;
+        }
+            currentGoal = currentRoad.path.get(currentRoad.path.indexOf(currentGoal)+change);
+            
+            determineDirection();
+            
         }else{
             move();
         }
@@ -47,10 +62,10 @@ public class Car {
         return Math.sqrt((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y));
     } 
     
-    public void handleIntersection(Intersection I){
+    public void handleIntersection(){
         
-        pos.x = I.x;
-        pos.y = I.y;
+        pos.x = currentGoal.x;
+        pos.y = currentGoal.y;
         
         currentLane = targetLane;
         currentRoad = currentLane.parentRoad;
@@ -62,7 +77,9 @@ public class Car {
             change = -1;
         }
         
-        currentGoal = currentRoad.path.get(currentRoad.path.indexOf(I)+change);
+        currentGoal = currentRoad.path.get(currentRoad.path.indexOf(currentGoal)+change);
+        decideNextTurn();
+        determineDirection();
     }
     
     public void move(){
@@ -72,9 +89,27 @@ public class Car {
     }
     
     public void decideNextTurn(){
+        Lane newLane;
+        do{
+            int i = randomInt(0,currentRoad.lanes.length);
+            newLane = currentRoad.lanes[i];
+        }while(newLane.direction!=currentLane.direction);
         
+        changeLanes(newLane);
+        
+        if(currentGoal instanceof Intersection){
+            Intersection next = (Intersection) currentGoal;
+            targetLane = next.getPossibilities(newLane).get(randomInt(0,next.getPossibilities(newLane).size()-1));
+        }
     }
     
+    public int randomInt(int low, int high){
+        return (int)(low +(high-low+1)*Math.random()); 
+    }
+    
+    public void changeLanes(Lane newLane){
+        currentLane = newLane;
+    }
 }
 
 
