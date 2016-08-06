@@ -9,11 +9,15 @@ import java.util.*;
 public class Road {
     
     ArrayList<Position> path = new ArrayList<Position>();
+    int lanesWith;
+    int lanesAgainst;
     Lane[] lanes;
     String name;
     
     public Road(String name, int lanesWith, int lanesAgainst) {
         this.name = name;
+        this.lanesWith = lanesWith;
+        this.lanesAgainst = lanesAgainst;
         lanes = new Lane[lanesWith + lanesAgainst];
         for(int i = 0; i < lanes.length; i++) {
             lanes[i] = new Lane(this, (i < lanesWith)? Direction.WITH_ROAD_DEF : Direction.AGAINST_ROAD_DEF);
